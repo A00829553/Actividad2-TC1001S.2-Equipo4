@@ -24,6 +24,10 @@ def insidef(food):
     "Return True if food inside boundaries."
     return -200 < food.x < 190 and -200 < food.y < 190
 
+def insidef(food):
+    "Return True if food inside boundaries."
+    return -200 < food.x < 190 and -200 < food.y < 190
+
 def move():
     global snakeColor,foodColor,colorsSnake,colorsFood
     "Move snake forward one segment."
@@ -46,23 +50,23 @@ def move():
         snakeColor = colorsSnake[randrange(0,5)]
     else:
         snake.pop(0)
-        food.move(foodmovelist[randrange(0,4)])
+        movement = foodmovelist[randrange(0,4)]
+        food.move(movement)
     clear()
-
+    if not insidef(food) and movement == foodmovelist[0]:
+      food.move(foodmovelist[1])
+    if not insidef(food) and movement == foodmovelist[1]:
+      food.move(foodmovelist[0])
+    if not insidef(food) and movement == foodmovelist[2]:
+      food.move(foodmovelist[3])
+    if not insidef(food) and movement == foodmovelist[3]:
+      food.move(foodmovelist[2])
+    
     for body in snake:
         square(body.x, body.y, 9, snakeColor)
 
 
     square(food.x, food.y, 9, 'green')
-    #food no salga del cuadro
-    if not insidef(food) and food == foodmovelist[0]:
-          food = foodmovelist(1)
-    if not insidef(food) and food == foodmovelist[1]:
-          food = foodmovelist(0)
-    if not insidef(food) and food == foodmovelist[2]:
-          food = foodmovelist(3)
-    if not insidef(food) and food == foodmovelist[3]:
-          food = foodmovelist(2)
     square(food.x, food.y, 9, foodColor)
 
     update()
