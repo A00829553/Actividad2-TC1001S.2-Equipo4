@@ -5,6 +5,7 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+foodmovelist = [vector(0,10),vector(0,-10),vector(10,0),vector(-10,0)]
 
 def change(x, y):
     "Change snake direction."
@@ -17,6 +18,7 @@ def inside(head):
 
 def move():
     "Move snake forward one segment."
+    global food,foodmovelist
     head = snake[-1].copy()
     head.move(aim)
 
@@ -33,13 +35,22 @@ def move():
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
-
+        food.move(foodmovelist[randrange(0,4)])
     clear()
 
     for body in snake:
         square(body.x, body.y, 9, 'black')
 
     square(food.x, food.y, 9, 'green')
+    #food no salga del cuadro
+    if not inside(food) and food == foodmovelist[0]:
+          food = foodmovelist(1)
+    if not inside(food) and food == foodmovelist[1]:
+          food = foodmovelist(0)
+    if not inside(food) and food == foodmovelist[2]:
+          food = foodmovelist(3)
+    if not inside(food) and food == foodmovelist[3]:
+          food = foodmovelist(2)
     update()
     ontimer(move, 100)
 
