@@ -6,6 +6,11 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 foodmovelist = [vector(0,10),vector(0,-10),vector(10,0),vector(-10,0)]
+colorsSnake = ['#880C88','#0C885F','#AD7A0A','#2F0B8F', 'black']
+colorsFood = ['#B49EF0','#9EE5F0','#BFF09E','#F0B89E','green']
+snakeColor = 'black'
+foodColor = 'green'
+
 
 def change(x, y):
     "Change snake direction."
@@ -17,6 +22,7 @@ def inside(head):
     return -200 < head.x < 190 and -200 < head.y < 190
 
 def move():
+    global snakeColor,foodColor,colorsSnake,colorsFood
     "Move snake forward one segment."
     global food,foodmovelist
     head = snake[-1].copy()
@@ -33,13 +39,16 @@ def move():
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
+        foodColor = colorsFood[randrange(0,5)]
+        snakeColor = colorsSnake[randrange(0,5)]
     else:
         snake.pop(0)
         food.move(foodmovelist[randrange(0,4)])
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snakeColor)
+
 
     square(food.x, food.y, 9, 'green')
     #food no salga del cuadro
@@ -51,8 +60,11 @@ def move():
           food = foodmovelist(3)
     if not inside(food) and food == foodmovelist[3]:
           food = foodmovelist(2)
+    square(food.x, food.y, 9, foodColor)
+
     update()
     ontimer(move, 100)
+    
 
 setup(420, 420, 370, 0)
 hideturtle()
