@@ -20,6 +20,9 @@ def change(x, y):
 def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
+def insidef(food):
+    "Return True if food inside boundaries."
+    return -200 < food.x < 190 and -200 < food.y < 190
 
 def move():
     global snakeColor,foodColor,colorsSnake,colorsFood
@@ -52,13 +55,13 @@ def move():
 
     square(food.x, food.y, 9, 'green')
     #food no salga del cuadro
-    if not inside(food) and food == foodmovelist[0]:
+    if not insidef(food) and food == foodmovelist[0]:
           food = foodmovelist(1)
-    if not inside(food) and food == foodmovelist[1]:
+    if not insidef(food) and food == foodmovelist[1]:
           food = foodmovelist(0)
-    if not inside(food) and food == foodmovelist[2]:
+    if not insidef(food) and food == foodmovelist[2]:
           food = foodmovelist(3)
-    if not inside(food) and food == foodmovelist[3]:
+    if not insidef(food) and food == foodmovelist[3]:
           food = foodmovelist(2)
     square(food.x, food.y, 9, foodColor)
 
