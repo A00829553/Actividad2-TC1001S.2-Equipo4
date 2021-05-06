@@ -1,3 +1,5 @@
+#Conclusión Luis Carlos: en lo personal nunca he programado mas que cosas muy basicas hace un año y medio que como no necesite ya se me habian olvidado 
+#y lograr retomar algunas de esas cosas y poder realizar mi parte es muy satisfactoio y creo que comprendo al menos mas que antes como funciona programar.
 from turtle import *
 from random import randrange
 from freegames import square, vector
